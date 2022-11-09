@@ -1,0 +1,76 @@
+#include<iostream>
+using namespace std;
+struct node{
+	int data;
+	node *next;	
+};
+	node *front = NULL;
+	node *rear = NULL;
+	node *temp = NULL ;
+void enqueue()
+{
+	for(int i = 1;i <= 30; i++)
+	{
+		if(rear == NULL)//empty queue
+		{
+			rear = new node;
+			rear->data= i;
+			rear->next = NULL;
+			front = rear; // first node for the queue
+		}
+		else//not empty queue
+		{
+			temp = new node;//temporary pointer
+			temp->data = i;
+			rear->next = temp;//The back of the queue add the element
+			temp->next = NULL;
+			rear = temp;
+		}
+	}
+}
+void dequeue()
+{
+	temp = front;
+	if(front == NULL)//empty queue
+	{
+		cout<<"There's nothing in the queue"<<endl;
+		
+	}
+	else{
+		if(temp->next != NULL){
+			temp = temp->next;
+			cout<<"Element deleted from queue is: "<<front->data<<"\n\n";
+			delete front;//deleting from front since FIFO
+			front = temp;
+		}
+	}
+}
+void display()
+{
+	temp = front;//to be able to traverse through the queue
+	
+	if((front == NULL) && (rear == NULL))
+	{
+		cout<<"The queue is empty!!"<<endl;
+	}
+	cout<<"Below are elements in the queue."<<"\n\n";
+	
+	int rem; 
+	while(temp != NULL)
+	{
+		rem = temp->data % 2;
+		if(rem != 0){
+			cout<<temp->data<<" ";
+		}
+		temp = temp->next;
+	}
+	cout<<"\n\n";
+}
+int main()
+{
+	enqueue();
+	display();
+	cout<<"After dequeue function"<<"\n\n";
+	dequeue();
+	display();
+}
