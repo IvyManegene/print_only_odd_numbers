@@ -1,0 +1,61 @@
+#include<iostream>
+using namespace std;
+struct node{
+	int data;
+	node *next;	
+};
+	node *top = NULL;
+	node *temp = NULL ;
+void push()
+{
+	for(int i = 1;i <= 30; i++)
+	{
+		temp = new node;//temporary pointer
+		temp->data = i;
+		temp->next = top;//The top of the stack add the element
+		top = temp;
+	}
+}
+void pop()
+{
+	temp = top;
+	if(top == NULL)//empty stack
+	{
+		cout<<"There's nothing in the stack"<<endl;
+		
+	}
+	cout<<"Element deleted from stack is: "<<temp->data<<"\n\n";			
+		top = temp->next;
+		delete temp;//deleting from top since LIFO
+}
+
+void display()
+{
+	temp = top;//to be able to traverse through the stack
+	
+	if(top == NULL)
+	{
+		cout<<"The stack is empty!!"<<endl;
+	}
+	cout<<"Below are elements in the stack."<<"\n\n";
+	
+	int rem;
+	while(temp != NULL)
+	{
+		rem = temp->data % 2;
+		if(rem != 0){
+			cout<<temp->data<<" ";
+		}
+		
+		temp = temp->next;
+	}
+	cout<<"\n\n";
+}
+int main()
+{
+	push();
+	display();
+	cout<<"\t**After pop function**\t"<<"\n\n";
+	pop();
+	display();
+}
